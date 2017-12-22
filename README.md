@@ -16,7 +16,9 @@ RoleStore<TUser> :  IRoleStore<TRole>
   
 How:
 1. Create a webapi project
-2. In Startup.cs add:
+2. Add LiteDB in Nuget.
+4. Add AspNetCore.Identity.LiteDB reference
+5. In Startup.cs add:
 ```
 services.AddSingleton(new LiteDatabase(@"MyData.db"));
 
