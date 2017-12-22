@@ -1,6 +1,9 @@
 # AspNetCore.Identity.LiteDB
 AspNetCore Identity Provider for LiteDB
 
+LiteDb link:
+https://github.com/mbdavid/LiteDB
+
 This provider is created following Microsoft's guide:
 https://docs.microsoft.com/en-us/aspnet/core/security/authentication/identity-custom-storage-providers
 
