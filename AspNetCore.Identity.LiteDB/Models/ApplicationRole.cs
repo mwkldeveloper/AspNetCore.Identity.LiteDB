@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AspNetCore.Identity.LiteDB.Models
+namespace AspNetCore.Identity.LiteDB
 {
 	public class ApplicationRole
 	{

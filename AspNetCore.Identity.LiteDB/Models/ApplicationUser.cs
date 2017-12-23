@@ -5,7 +5,7 @@ using System.Security.Principal;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 
-namespace AspNetCore.Identity.LiteDB.Models
+namespace AspNetCore.Identity.LiteDB
 {
 	public class ApplicationUser : IIdentity
 	{

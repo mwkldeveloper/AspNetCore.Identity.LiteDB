@@ -1,5 +1,4 @@
-﻿using AspNetCore.Identity.LiteDB.Models;
-using LiteDB;
+﻿using LiteDB;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
