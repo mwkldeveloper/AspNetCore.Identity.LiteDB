@@ -144,6 +144,7 @@ namespace AspNetCore.Identity.LiteDB
 			return IdentityResult.Success;
 		}
 		#endregion
+
 		#region IUserPasswordStore<TUser>
 		public Task SetPasswordHashAsync(TUser user, string passwordHash, CancellationToken cancellationToken)
 		{
