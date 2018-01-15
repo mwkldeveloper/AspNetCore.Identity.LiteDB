@@ -20,7 +20,7 @@ namespace AspNetCore.Identity.LiteDB.Models
 		public string AuthenticationType { get; set; }
 		public bool IsAuthenticated { get; set; }
 
-		public virtual List<string> Roles { get; set; } = new List<string>() { "User" };
+		public virtual List<string> Roles { get; set; }
 		//public List<Claim> Claims { get; set; } = new List<Claim>();
 
 	}
