@@ -13,8 +13,12 @@ It is only implement:
 UserStore<TUser> : IUserStore<TUser>
 	, IUserRoleStore<TUser>
 	, IUserPasswordStore<TUser>
+	, IQueryableUserStore<TUser>
+        , IUserLockoutStore<TUser>
   
 RoleStore<TUser> :  IRoleStore<TRole>
+
+
 ```
   
 How:
