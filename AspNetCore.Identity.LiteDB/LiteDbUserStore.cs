@@ -13,6 +13,8 @@ namespace AspNetCore.Identity.LiteDB
 	public class LiteDbUserStore<TUser> : IUserStore<TUser>
 	, IUserRoleStore<TUser>
 	, IUserPasswordStore<TUser>
+	, IQueryableUserStore<TUser>
+	, IUserLockoutStore<TUser>
 	//,IUserLoginStore<IdentityUser>
 	//, IUserClaimStore<TUser>
 	//,IUserSecurityStampStore<IdentityUser> 
@@ -221,39 +223,8 @@ namespace AspNetCore.Identity.LiteDB
 		}
 		#endregion
 
-		#region IDisposable Support
-		private bool disposedValue = false; // To detect redundant calls
-
-		protected virtual void Dispose(bool disposing)
-		{
-			if (!disposedValue)
-			{
-				if (disposing)
-				{
-					// TODO: dispose managed state (managed objects).
-				}
-
-				// TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
-				// TODO: set large fields to null.
-
-				disposedValue = true;
-			}
-		}
-
-		// TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
-		// ~UserStore() {
-		//   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-		//   Dispose(false);
-		// }
-
-		// This code added to correctly implement the disposable pattern.
-		public void Dispose()
-		{
-			// Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-			Dispose(true);
-			// TODO: uncomment the following line if the finalizer is overridden above.
-			// GC.SuppressFinalize(this);
-		}
+		#region IQueryableUserStore
+		public IQueryable<TUser> Users => _usersCollection.FindAll().AsQueryable();
 		#endregion
 
 		#region IUserClaimStore<TUser>
@@ -355,5 +326,131 @@ namespace AspNetCore.Identity.LiteDB
 		//}
 		#endregion
 
+		#region IDisposable Support
+		private bool disposedValue = false; // To detect redundant calls
+
+		protected virtual void Dispose(bool disposing)
+		{
+			if (!disposedValue)
+			{
+				if (disposing)
+				{
+					// TODO: dispose managed state (managed objects).
+				}
+
+				// TODO: free unmanaged resources (unmanaged objects) and override a finalizer below.
+				// TODO: set large fields to null.
+
+				disposedValue = true;
+			}
+		}
+
+		// TODO: override a finalizer only if Dispose(bool disposing) above has code to free unmanaged resources.
+		// ~UserStore() {
+		//   // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+		//   Dispose(false);
+		// }
+		
+		// This code added to correctly implement the disposable pattern.
+		public void Dispose()
+		{
+			// Do not change this code. Put cleanup code in Dispose(bool disposing) above.
+			Dispose(true);
+			// TODO: uncomment the following line if the finalizer is overridden above.
+			// GC.SuppressFinalize(this);
+		}
+		#endregion
+
+		#region IUserLockoutStore Support
+		public Task<DateTimeOffset?> GetLockoutEndDateAsync(TUser user, CancellationToken cancellationToken)
+		{
+			cancellationToken.ThrowIfCancellationRequested();
+
+			if (user == null)
+			{
+				throw new ArgumentNullException(nameof(user));
+			}
+
+			return Task.FromResult(user.LockoutEndDate);
+		}
+
+		public Task SetLockoutEndDateAsync(TUser user, DateTimeOffset? lockoutEnd, CancellationToken cancellationToken)
+		{
+			cancellationToken.ThrowIfCancellationRequested();
+
+			if (user == null)
+			{
+				throw new ArgumentNullException(nameof(user));
+			}
+
+			user.LockoutEndDate = lockoutEnd;
+			return Task.CompletedTask;
+		}
+
+		public Task<int> IncrementAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
+		{
+			cancellationToken.ThrowIfCancellationRequested();
+
+			if (user == null)
+			{
+				throw new ArgumentNullException(nameof(user));
+			}
+
+			var newAccessFailedCount = ++user.AccessFailedCount;
+			return Task.FromResult(newAccessFailedCount);
+		}
+
+		public Task ResetAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
+		{
+			cancellationToken.ThrowIfCancellationRequested();
+
+			if (user == null)
+			{
+				throw new ArgumentNullException(nameof(user));
+			}
+
+			user.AccessFailedCount = 0;
+			
+			return Task.CompletedTask;
+		}
+
+		public Task<int> GetAccessFailedCountAsync(TUser user, CancellationToken cancellationToken)
+		{
+			cancellationToken.ThrowIfCancellationRequested();
+
+			if (user == null)
+			{
+				throw new ArgumentNullException(nameof(user));
+			}
+
+			return Task.FromResult(user.AccessFailedCount);
+		}
+
+		public Task<bool> GetLockoutEnabledAsync(TUser user, CancellationToken cancellationToken)
+		{
+			cancellationToken.ThrowIfCancellationRequested();
+
+			if (user == null)
+			{
+				throw new ArgumentNullException(nameof(user));
+			}
+
+			return Task.FromResult(user.LockoutEnabled);
+		}
+
+		public Task SetLockoutEnabledAsync(TUser user, bool enabled, CancellationToken cancellationToken)
+		{
+			cancellationToken.ThrowIfCancellationRequested();
+
+			if (user == null)
+			{
+				throw new ArgumentNullException(nameof(user));
+			}
+
+			user.LockoutEnabled = enabled;
+
+			return Task.CompletedTask;
+		}
+		#endregion
 	}
 }

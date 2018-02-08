@@ -10,7 +10,6 @@ namespace AspNetCore.Identity.LiteDB.Models
 	public class ApplicationUser : IIdentity
 	{
 		public virtual Guid Id { get; set; } = Guid.NewGuid();
-
 		public string UserName { get; set; }
 		public string Name { get; set; }
 		public virtual string Email { get; set; }
@@ -19,6 +18,9 @@ namespace AspNetCore.Identity.LiteDB.Models
 		public string NormalizedUserName { get; internal set; }
 		public string AuthenticationType { get; set; }
 		public bool IsAuthenticated { get; set; }
+		public virtual int AccessFailedCount { get; set; }
+		public virtual bool LockoutEnabled { get; set; }
+		public virtual DateTimeOffset? LockoutEndDate { get; set; }
 
 		public virtual List<string> Roles { get; set; } = new List<string>();
 		//public List<Claim> Claims { get; set; } = new List<Claim>();
