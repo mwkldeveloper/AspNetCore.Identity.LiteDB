@@ -15,8 +15,8 @@ using System.Threading.Tasks;
 namespace DemoWebAPI.Controllers
 {
 	[Route("api")]
-	public class AccountController : ControllerBase
-    {
+	public class AccountController
+	{
 		private readonly SignInManager<ApplicationUser> _signInManager;
 		private readonly UserManager<ApplicationUser> _userManager;
 		private readonly IConfiguration _configuration;
@@ -40,7 +40,7 @@ namespace DemoWebAPI.Controllers
 			if (result.Succeeded)
 			{
 				var appUser = await _userManager.FindByNameAsync(model.Email);
-				return GenerateJwtToken(model.Email, appUser);
+				return await GenerateJwtToken(model.Email, appUser);
 			}
 
 			throw new ApplicationException("INVALID_LOGIN_ATTEMPT");
@@ -60,13 +60,13 @@ namespace DemoWebAPI.Controllers
 			if (result.Succeeded)
 			{
 				await _signInManager.SignInAsync(user, false);
-				return GenerateJwtToken(model.Email, user);
+				return await GenerateJwtToken(model.Email, user);
 			}
 
 			throw new ApplicationException("UNKNOWN_ERROR");
 		}
 
-		private object GenerateJwtToken(string email, ApplicationUser user)
+		private async Task<object> GenerateJwtToken(string email, ApplicationUser user)
 		{
 			var claims = new List<Claim>
 			{
