@@ -22,12 +22,12 @@ namespace AspNetCore.Identity.LiteDB.Data
          LiteDatabase = new LiteDatabase(connectionString);
       }
 
-      public LiteDbContext(LiteDatabase liteDatabase)
+      public LiteDbContext(ILiteDatabase liteDatabase)
       {
          LiteDatabase = liteDatabase;
       }
 
-      public LiteDatabase LiteDatabase { get; protected set; }
+      public ILiteDatabase LiteDatabase { get; protected set; }
 
    }
 }

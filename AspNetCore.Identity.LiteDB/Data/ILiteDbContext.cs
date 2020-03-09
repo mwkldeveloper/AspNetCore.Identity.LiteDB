@@ -4,6 +4,6 @@ namespace AspNetCore.Identity.LiteDB.Data
 {
    public interface ILiteDbContext
    {
-      LiteDatabase LiteDatabase { get; }
+      ILiteDatabase LiteDatabase { get; }
    }
 }
