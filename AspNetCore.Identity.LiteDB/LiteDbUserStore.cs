@@ -28,7 +28,8 @@ namespace AspNetCore.Identity.LiteDB
       IUserEmailStore<TUser>,
       IUserLockoutStore<TUser>,
       IUserPhoneNumberStore<TUser>,
-      IUserAuthenticatorKeyStore<TUser> where TUser : ApplicationUser, new()
+      IUserAuthenticatorKeyStore<TUser>,
+      IQueryableUserStore<TUser> where TUser : ApplicationUser, new()
    {
       private const string AuthenticatorStoreLoginProvider = "[AspNetAuthenticatorStore]";
       private const string AuthenticatorKeyTokenName = "AuthenticatorKey";
@@ -51,9 +52,12 @@ namespace AspNetCore.Identity.LiteDB
          return Task.FromResult(cancellationToken);
       }
 
-      #region IUserStore
+        public IQueryable<TUser> Users => _users.FindAll().AsQueryable();
 
-      public Task<string> GetUserIdAsync(TUser user, CancellationToken cancellationToken = default(CancellationToken))
+
+        #region IUserStore
+
+        public Task<string> GetUserIdAsync(TUser user, CancellationToken cancellationToken = default(CancellationToken))
       {
          cancellationToken.ThrowIfCancellationRequested();
          ThrowIfDisposed();
@@ -738,7 +742,7 @@ namespace AspNetCore.Identity.LiteDB
       private bool _disposed;
       private readonly SafeHandle _handle = new SafeFileHandle(IntPtr.Zero, true);
 
-      public void Dispose()
+        public void Dispose()
       {
          Dispose(true);
          GC.SuppressFinalize(this);
