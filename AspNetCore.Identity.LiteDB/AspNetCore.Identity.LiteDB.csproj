@@ -2,6 +2,10 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
+    <Company />
+    <PackageId>MWKL.AspNetCore.Identity.LiteDB</PackageId>
+    <Authors>Marcus</Authors>
+    <Product />
   </PropertyGroup>
 
   <ItemGroup>
