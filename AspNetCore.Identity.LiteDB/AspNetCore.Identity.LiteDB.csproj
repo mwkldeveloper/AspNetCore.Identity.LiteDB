@@ -8,6 +8,8 @@
     <Product />
     <Version>1.0.1</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageProjectUrl>https://github.com/leung85/AspNetCore.Identity.LiteDB</PackageProjectUrl>
   </PropertyGroup>
 
   <ItemGroup>
@@ -19,6 +21,13 @@
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Data\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="..\LICENSE">
+      <Pack>True</Pack>
+      <PackagePath></PackagePath>
+    </None>
   </ItemGroup>
 
 </Project>
