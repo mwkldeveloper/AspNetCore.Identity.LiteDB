@@ -6,6 +6,8 @@
     <PackageId>MWKL.AspNetCore.Identity.LiteDB</PackageId>
     <Authors>Marcus</Authors>
     <Product />
+    <Version>1.0.1</Version>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
   </PropertyGroup>
 
   <ItemGroup>
