@@ -232,7 +232,7 @@ namespace AspNetCore.Identity.LiteDB
 
          if (providerKey == null) throw new ArgumentNullException(nameof(providerKey));
 
-         var query = _users.Find(l =>
+         var query = _users.Find(Query.All()).Where(l =>
             l.Logins.Any(s => (s.LoginProvider == loginProvider) & (s.ProviderKey == providerKey)));
 
          return Task.FromResult(query.FirstOrDefault());
