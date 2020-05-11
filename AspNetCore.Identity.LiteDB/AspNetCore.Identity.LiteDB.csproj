@@ -6,7 +6,7 @@
     <PackageId>MWKL.AspNetCore.Identity.LiteDB</PackageId>
     <Authors>Marcus</Authors>
     <Product />
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <PackageLicenseFile>LICENSE</PackageLicenseFile>
     <PackageProjectUrl>https://github.com/leung85/AspNetCore.Identity.LiteDB</PackageProjectUrl>
