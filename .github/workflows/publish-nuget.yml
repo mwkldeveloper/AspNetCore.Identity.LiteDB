@@ -21,7 +21,7 @@ jobs:
       - name: Pack
         run: |
           VERSION="${GITHUB_REF_NAME#v}"
-          dotnet pack AspNetCore.Identity.LiteDB/AspNetCore.Identity.LiteDB.csproj -c Release -p:Version="$VERSION" --output ./nupkg
+          dotnet pack AspNetCore.Identity.LiteDB/AspNetCore.Identity.LiteDB.csproj -c Release -p:Version="$VERSION" -p:GeneratePackageOnBuild=false --output ./nupkg
 
       - name: NuGet login
         uses: NuGet/login@v1
